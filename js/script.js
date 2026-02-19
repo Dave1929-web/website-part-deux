@@ -21,6 +21,93 @@ document.addEventListener('DOMContentLoaded',function(){
     }, 4500);
   })();
 
+  // Hero constellation hover effect
+  (function heroConstellation(){
+    const hero = document.getElementById('hero');
+    const canvas = document.getElementById('constellation');
+    if(!hero || !canvas) return;
+
+    const context = canvas.getContext('2d');
+    if(!context) return;
+
+    let width = 0;
+    let height = 0;
+    const points = [];
+    const maxPoints = 20;
+    const linkDistance = 110;
+
+    function resizeCanvas(){
+      width = hero.clientWidth;
+      height = hero.clientHeight;
+      canvas.width = width;
+      canvas.height = height;
+    }
+
+    function addPoint(x, y){
+      points.push({ x, y, life: 1 });
+      if(points.length > maxPoints) points.shift();
+    }
+
+    function draw(){
+      context.clearRect(0, 0, width, height);
+
+      for(let i = 0; i < points.length; i++){
+        const point = points[i];
+        point.life -= 0.018;
+      }
+
+      for(let i = points.length - 1; i >= 0; i--){
+        if(points[i].life <= 0) points.splice(i, 1);
+      }
+
+      for(let i = 0; i < points.length; i++){
+        const first = points[i];
+
+        context.beginPath();
+        context.fillStyle = `rgba(176, 220, 255, ${Math.max(first.life, 0)})`;
+        context.arc(first.x, first.y, 1.8, 0, Math.PI * 2);
+        context.fill();
+
+        for(let j = i + 1; j < points.length; j++){
+          const second = points[j];
+          const dx = first.x - second.x;
+          const dy = first.y - second.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if(distance > linkDistance) continue;
+
+          const opacity = ((linkDistance - distance) / linkDistance) * Math.min(first.life, second.life) * 0.9;
+          context.beginPath();
+          context.strokeStyle = `rgba(120, 210, 255, ${opacity})`;
+          context.lineWidth = 1;
+          context.moveTo(first.x, first.y);
+          context.lineTo(second.x, second.y);
+          context.stroke();
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    let lastPointTime = 0;
+    hero.addEventListener('pointermove', function(event){
+      const now = performance.now();
+      if(now - lastPointTime < 30) return;
+      lastPointTime = now;
+
+      const bounds = hero.getBoundingClientRect();
+      addPoint(event.clientX - bounds.left, event.clientY - bounds.top);
+    });
+
+    hero.addEventListener('pointerleave', function(){
+      points.length = 0;
+    });
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    requestAnimationFrame(draw);
+  })();
+
   // Shooting stars generator
   (function shootingStars(){
     const container = document.body;
