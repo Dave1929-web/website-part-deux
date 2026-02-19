@@ -14,6 +14,9 @@ h1,h2,h3,.logo text{font-family:'Orbitron',Inter,system-ui,Arial,sans-serif}
 .constellation{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
 .hero .container{position:relative;z-index:2}
 .hero h2{margin:0 0 .5rem;font-size:3rem;color:#ffffff;text-shadow:0 4px 20px rgba(0,0,0,0.6)}
+.hero-title{display:inline-block}.char{display:inline-block;opacity:0;animation:revealChar 0.5s ease forwards;text-shadow:0 0 14px rgba(167,139,250,0.6)}
+.char:nth-child(1){animation-delay:0.1s}.char:nth-child(2){animation-delay:0.2s}.char:nth-child(3){animation-delay:0.3s}.char:nth-child(4){animation-delay:0.4s}.char:nth-child(5){animation-delay:0.5s}.char:nth-child(6){animation-delay:0.6s}.char:nth-child(7){animation-delay:0.7s}
+@keyframes revealChar{0%{opacity:0;transform:translateY(12px)}100%{opacity:1;transform:translateY(0)}}
 .hero p{margin:0 0 1rem;color:var(--muted)}
 .cta{display:inline-block;padding:.75rem 1.25rem;background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#021025;border-radius:999px;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(167,139,250,0.25)}
 .features{padding:4rem 0}
@@ -39,11 +42,12 @@ h1,h2,h3,.logo text{font-family:'Orbitron',Inter,system-ui,Arial,sans-serif}
 	mix-blend-mode:screen;will-change:background-position, opacity;
 }
 .stars, .twinkling{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%}
-.stars{background:#000 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000"><defs><g id="s"><circle r="1" fill="white"/></g></defs><g fill="white" opacity="0.85"><use href="#s" x="20" y="30"/><use href="#s" x="120" y="200"/><use href="#s" x="220" y="60"/><use href="#s" x="340" y="300"/><use href="#s" x="480" y="120"/><use href="#s" x="620" y="20"/><use href="#s" x="720" y="240"/><use href="#s" x="820" y="80"/><use href="#s" x="940" y="340"/><use href="#s" x="1040" y="160"/><use href="#s" x="1240" y="480"/></g></svg>') repeat;opacity:0.48;transform:translateZ(0);z-index:1}
+.stars.constellation-mode{cursor:crosshair}.stars.constellation-mode .star-clickable{cursor:pointer;opacity:0.8}
+.constellation-line{position:absolute;background:linear-gradient(90deg, rgba(110,231,242,0.6), rgba(167,139,250,0.4));pointer-events:none;z-index:5}
 .twinkling{background:linear-gradient(transparent, rgba(10,6,20,0.6));pointer-events:none;mix-blend-mode:screen;animation:twinkle 10s linear infinite;z-index:3}
 @keyframes twinkle{0%{opacity:0.3}50%{opacity:0.8}100%{opacity:0.3}}
 
-.planet{position:absolute;border-radius:50%;box-shadow:0 0 24px rgba(110,231,242,0.22), inset -12px -10px 18px rgba(0,0,0,0.35);animation:planetDrift 28s ease-in-out infinite alternate}
+.planet{transform-origin:center}
 .planet::before{content:'';position:absolute;border-radius:50%;opacity:0.35}
 
 .planet-1{width:190px;height:190px;top:8%;right:7%;background:radial-gradient(circle at 30% 28%, #ffe9c9 0%, #ffbe8a 36%, #9d62b0 70%, #4b2a63 100%);box-shadow:0 0 38px rgba(255,190,140,0.38), inset -14px -12px 20px rgba(0,0,0,0.28)}
@@ -55,7 +59,18 @@ h1,h2,h3,.logo text{font-family:'Orbitron',Inter,system-ui,Arial,sans-serif}
 .planet-3{width:236px;height:236px;top:38%;left:64%;background:radial-gradient(circle at 28% 24%, #fff3ae 0%, #f1bf76 40%, #b57d53 72%, #734c3c 100%);box-shadow:0 0 36px rgba(255,210,120,0.34), inset -14px -12px 20px rgba(0,0,0,0.28);animation-duration:40s}
 .planet-3::after{content:'';position:absolute;top:50%;left:50%;width:312px;height:82px;border:5px solid rgba(214,186,255,0.76);border-radius:50%;transform:translate(-50%,-50%) rotate(-17deg);box-shadow:0 0 22px rgba(167,139,250,0.44)}
 
-@keyframes planetDrift{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(-16px,10px,0)}}
+.planet-orbit{position:absolute;border-radius:50%;pointer-events:none;animation:orbitSpin linear infinite}
+.orbit-1{width:220px;height:220px;top:8%;right:5%;animation-duration:18s}
+.orbit-2{width:160px;height:160px;bottom:10%;left:6%;animation-duration:22s}
+.orbit-3{width:290px;height:290px;top:36%;left:62%;animation-duration:26s}
+
+.moon{position:absolute;border-radius:50%;background:radial-gradient(circle at 32% 30%, #d0e8ff 0%, #6eb8ff 50%, #2b5a9f 100%);box-shadow:0 0 12px rgba(110,200,255,0.4);animation:moonOrbit linear infinite}
+.moon-1{width:24px;height:24px;animation-duration:18s}
+.moon-2{width:18px;height:18px;animation-duration:22s}
+.moon-3{width:28px;height:28px;animation-duration:26s}
+
+@keyframes orbitSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes moonOrbit{0%{top:0;left:50%;transform:translateX(-50%)}100%{top:0;left:50%;transform:translateX(-50%)}}
 
 @keyframes nebMove{0%{background-position:0% 0%}50%{background-position:20% 30%}100%{background-position:0% 0%}}
 

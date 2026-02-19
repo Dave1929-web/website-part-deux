@@ -6,7 +6,7 @@
     <title>Cosmic Site</title>
     <!-- Spacey font -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=20260219-4">
+    <link rel="stylesheet" href="css/styles.css?v=20260219-5">
 </head>
 <body>
   <header class="site-header">
@@ -41,13 +41,22 @@
   <main>
     <section class="hero" id="hero">
       <div class="hero-planets" aria-hidden="true">
-        <div class="planet planet-1"></div>
-        <div class="planet planet-2"></div>
-        <div class="planet planet-3"></div>
+        <div class="planet-orbit orbit-1">
+          <div class="planet planet-1"></div>
+          <div class="moon moon-1"></div>
+        </div>
+        <div class="planet-orbit orbit-2">
+          <div class="planet planet-2"></div>
+          <div class="moon moon-2"></div>
+        </div>
+        <div class="planet-orbit orbit-3">
+          <div class="planet planet-3"></div>
+          <div class="moon moon-3"></div>
+        </div>
       </div>
       <canvas id="constellation" class="constellation" aria-hidden="true"></canvas>
       <div class="container">
-        <h2>Welcome</h2>
+        <h2 class="hero-title"><span class="char">W</span><span class="char">e</span><span class="char">l</span><span class="char">c</span><span class="char">o</span><span class="char">m</span><span class="char">e</span></h2>
         <p>A minimal static site scaffold.</p>
         <a class="cta" href="#contact">Get in touch</a>
       </div>
@@ -93,6 +102,6 @@
     <div class="container">© Simple Website</div>
   </footer>
 
-  <script src="js/script.js?v=20260219-2"></script>
+  <script src="js/script.js?v=20260219-3"></script>
 </body>
 </html>

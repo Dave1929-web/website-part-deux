@@ -144,4 +144,89 @@ document.addEventListener('DOMContentLoaded',function(){
       else if(r < 0.75) createStar();
     }, 600);
   })();
+
+  // Scroll-triggered planet rotation
+  (function planetRotation(){
+    const planets = document.querySelectorAll('.planet-orbit');
+    if(!planets.length) return;
+    window.addEventListener('scroll', ()=>{
+      const scrollY = window.scrollY;
+      planets.forEach((orbit, i)=>{
+        const speed = [2.5, 3, 1.8][i];
+        orbit.style.transform = `rotate(${scrollY * speed}deg)`;
+      });
+    });
+  })();
+
+  // Interactive constellation builder
+  (function constellationBuilder(){
+    let isBuilding = false;
+    let selectedStars = [];
+    const lines = [];
+    
+    window.toggleConstellation = function(){
+      isBuilding = !isBuilding;
+      document.body.classList.toggle('constellation-mode', isBuilding);
+      selectedStars = [];
+      lines.forEach(line => line.remove());
+      lines.length = 0;
+    };
+
+    document.addEventListener('click', (e)=>{
+      if(!isBuilding) return;
+      
+      // Check if click is on a star (estimated position from starfield)
+      const x = e.clientX;
+      const y = e.clientY;
+      
+      // Create clickable star zones
+      const starZones = [
+        {x: 20, y: 30}, {x: 120, y: 200}, {x: 220, y: 60},
+        {x: 340, y: 300}, {x: 480, y: 120}, {x: 620, y: 20},
+        {x: 720, y: 240}, {x: 820, y: 80}, {x: 940, y: 340},
+        {x: 1040, y: 160}, {x: 1240, y: 480}
+      ];
+      
+      for(let zone of starZones){
+        const sx = (zone.x / 1600) * window.innerWidth;
+        const sy = (zone.y / 1000) * window.innerHeight;
+        const dist = Math.sqrt((x - sx) ** 2 + (y - sy) ** 2);
+        
+        if(dist < 30){
+          selectedStars.push({x: sx, y: sy});
+          
+          if(selectedStars.length >= 2){
+            const prev = selectedStars[selectedStars.length - 2];
+            const cur = selectedStars[selectedStars.length - 1];
+            drawConstellation(prev, cur);
+          }
+          
+          if(selectedStars.length >= 8){
+            selectedStars = [];
+            lines.forEach(l => l.remove());
+            lines.length = 0;
+          }
+          return;
+        }
+      }
+    });
+    
+    function drawConstellation(from, to){
+      const dx = to.x - from.x;
+      const dy = to.y - from.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+      
+      const line = document.createElement('div');
+      line.className = 'constellation-line';
+      line.style.left = from.x + 'px';
+      line.style.top = from.y + 'px';
+      line.style.width = dist + 'px';
+      line.style.height = '2px';
+      line.style.transform = `rotate(${angle}deg)`;
+      line.style.transformOrigin = '0 50%';
+      document.body.appendChild(line);
+      lines.push(line);
+    }
+  })();
 });
