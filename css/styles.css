@@ -7,6 +7,8 @@ body{margin:0;background:var(--bg);color:#e6eef8;min-height:100vh;position:relat
 .site-header .container{display:flex;align-items:center;justify-content:space-between}
 .logo{margin:0;padding:.75rem 0;font-size:1.25rem;font-weight:700;color:var(--accent-2)}
 .nav a{margin-left:1rem;color:var(--accent);text-decoration:none}
+/* Use Orbitron for headings and logo */
+h1,h2,h3,.logo text{font-family:'Orbitron',Inter,system-ui,Arial,sans-serif}
 .hero{padding:6rem 0 4rem;text-align:center;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0));position:relative}
 .hero h2{margin:0 0 .5rem;font-size:3rem;color:#ffffff;text-shadow:0 4px 20px rgba(0,0,0,0.6)}
 .hero p{margin:0 0 1rem;color:var(--muted)}
@@ -23,8 +25,8 @@ body{margin:0;background:var(--bg);color:#e6eef8;min-height:100vh;position:relat
 
 /* Starfield layers */
 .stars, .twinkling{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;z-index:0}
-.stars{background:#000 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800"><defs><g id="s"><circle r="1" fill="white"/></g></defs><g fill="white" opacity="0.8"><use href="#s" x="20" y="30"/><use href="#s" x="120" y="200"/><use href="#s" x="220" y="60"/><use href="#s" x="340" y="300"/><use href="#s" x="480" y="120"/><use href="#s" x="620" y="20"/><use href="#s" x="720" y="240"/><use href="#s" x="820" y="80"/><use href="#s" x="940" y="340"/><use href="#s" x="1040" y="160"/></g></svg>') repeat;opacity:0.6;transform:translateZ(0)}
-.twinkling{background:linear-gradient(transparent, rgba(10,6,20,0.6));pointer-events:none;mix-blend-mode:screen;animation:twinkle 8s linear infinite}
+.stars{background:#000 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000"><defs><g id="s"><circle r="1" fill="white"/></g></defs><g fill="white" opacity="0.85"><use href="#s" x="20" y="30"/><use href="#s" x="120" y="200"/><use href="#s" x="220" y="60"/><use href="#s" x="340" y="300"/><use href="#s" x="480" y="120"/><use href="#s" x="620" y="20"/><use href="#s" x="720" y="240"/><use href="#s" x="820" y="80"/><use href="#s" x="940" y="340"/><use href="#s" x="1040" y="160"/><use href="#s" x="1240" y="480"/></g></svg>') repeat;opacity:0.55;transform:translateZ(0)}
+.twinkling{background:linear-gradient(transparent, rgba(10,6,20,0.6));pointer-events:none;mix-blend-mode:screen;animation:twinkle 10s linear infinite}
 @keyframes twinkle{0%{opacity:0.3}50%{opacity:0.8}100%{opacity:0.3}}
 
 /* make content sit above backgrounds */
@@ -36,7 +38,7 @@ header.site-header, main, footer.site-footer{position:relative;z-index:1}
 .shooting-star{position:fixed;top:0;left:0;width:3px;height:2px;background:linear-gradient(90deg,rgba(255,255,255,0.9),rgba(255,200,255,0.6));transform:translate3d(0,0,0);z-index:0;border-radius:2px;box-shadow:0 0 12px rgba(166,139,255,0.6)}
 @keyframes shoot {
 	0%{opacity:1;transform:translate3d(0,0,0) rotate(25deg) scaleX(1)}
-	100%{opacity:0;transform:translate3d(-1200px,700px,0) rotate(25deg) scaleX(0.2)}
+	100%{opacity:0;transform:translate3d(-1400px,900px,0) rotate(25deg) scaleX(0.15)}
 }
 
 /* Quotes */
@@ -46,3 +48,7 @@ header.site-header, main, footer.site-footer{position:relative;z-index:1}
 .quote{display:none;font-size:1.15rem;margin:0;padding:.5rem 1rem;background:rgba(255,255,255,0.02);border-left:3px solid rgba(167,139,250,0.25);border-radius:6px}
 .quote.active{display:block;animation:fadeIn 900ms ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* Comet styling */
+.comet{position:fixed;top:0;left:0;width:6px;height:3px;background:linear-gradient(90deg,rgba(255,250,220,1),rgba(167,139,250,0.9));border-radius:3px;box-shadow:0 0 18px rgba(255,220,180,0.6);z-index:0}
+@keyframes cometMove{0%{opacity:1;transform:translate3d(0,0,0) rotate(18deg) scaleX(1)}100%{opacity:0;transform:translate3d(-2200px,1100px,0) rotate(18deg) scaleX(0.15)}}

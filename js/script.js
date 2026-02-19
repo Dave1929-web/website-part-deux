@@ -27,16 +27,34 @@ document.addEventListener('DOMContentLoaded',function(){
     function createStar(){
       const star = document.createElement('div');
       star.className = 'shooting-star';
-      const startX = Math.floor(window.innerWidth * (0.2 + Math.random()*0.8));
-      const startY = Math.floor(window.innerHeight * (0.05 + Math.random()*0.25));
+      const startX = Math.floor(window.innerWidth * (0.15 + Math.random()*0.8));
+      const startY = Math.floor(window.innerHeight * (0.02 + Math.random()*0.2));
       star.style.left = startX + 'px';
       star.style.top = startY + 'px';
-      const dur = 1200 + Math.floor(Math.random()*900);
+      const dur = 900 + Math.floor(Math.random()*900);
       star.style.animation = `shoot ${dur}ms linear forwards`;
       container.appendChild(star);
-      setTimeout(()=> star.remove(), dur + 50);
+      setTimeout(()=> star.remove(), dur + 200);
     }
-    // create occasional bursts
-    setInterval(()=>{ if(Math.random() < 0.7) createStar(); }, 800);
+
+    function createComet(){
+      const c = document.createElement('div');
+      c.className = 'comet';
+      const startX = Math.floor(window.innerWidth * (0.3 + Math.random()*0.6));
+      const startY = Math.floor(window.innerHeight * (0.01 + Math.random()*0.15));
+      c.style.left = startX + 'px';
+      c.style.top = startY + 'px';
+      const dur = 1600 + Math.floor(Math.random()*1800);
+      c.style.animation = `cometMove ${dur}ms linear forwards`;
+      container.appendChild(c);
+      setTimeout(()=> c.remove(), dur + 200);
+    }
+
+    // create stars more often, comets rarely
+    setInterval(()=>{
+      const r = Math.random();
+      if(r < 0.12) createComet();
+      else if(r < 0.75) createStar();
+    }, 600);
   })();
 });

@@ -3,17 +3,34 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Simple Website</title>
-  <link rel="stylesheet" href="css/styles.css">
+    <title>Cosmic Site</title>
+    <!-- Spacey font -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container">
-      <h1 class="logo">Cosmic Site</h1>
-      <nav class="nav">
-        <a href="#features">Features</a>
-        <a href="#contact">Contact</a>
-      </nav>
+        <!-- SVG logo (planet + ring) -->
+        <a class="logo" href="/" aria-label="Cosmic Site">
+          <svg width="140" height="28" viewBox="0 0 220 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0%" stop-color="#a78bfa" />
+                <stop offset="100%" stop-color="#6ee7f2" />
+              </linearGradient>
+            </defs>
+            <g transform="translate(0,8)">
+              <circle cx="18" cy="12" r="8" fill="url(#g1)" />
+              <ellipse cx="24" cy="16" rx="28" ry="8" fill="none" stroke="rgba(167,139,250,0.25)" stroke-width="3" transform="rotate(-18 24 16)"/>
+              <text x="60" y="18" font-family="Orbitron, Arial, sans-serif" font-size="18" fill="#c4b5fd">Cosmic Site</text>
+            </g>
+          </svg>
+        </a>
+        <nav class="nav">
+          <a href="#features">Features</a>
+          <a href="#contact">Contact</a>
+        </nav>
     </div>
   </header>
   
