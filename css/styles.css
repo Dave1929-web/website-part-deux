@@ -23,25 +23,20 @@ h1,h2,h3,.logo text{font-family:'Orbitron',Inter,system-ui,Arial,sans-serif}
 .contact button{padding:.6rem 1rem;background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#021025;border:none;border-radius:10px}
 .site-footer{padding:1rem 0;text-align:center;color:var(--muted);font-size:.9rem}
 
-/* Starfield layers */
-.stars, .twinkling{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;z-index:0}
-.stars{background:#000 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000"><defs><g id="s"><circle r="1" fill="white"/></g></defs><g fill="white" opacity="0.85"><use href="#s" x="20" y="30"/><use href="#s" x="120" y="200"/><use href="#s" x="220" y="60"/><use href="#s" x="340" y="300"/><use href="#s" x="480" y="120"/><use href="#s" x="620" y="20"/><use href="#s" x="720" y="240"/><use href="#s" x="820" y="80"/><use href="#s" x="940" y="340"/><use href="#s" x="1040" y="160"/><use href="#s" x="1240" y="480"/></g></svg>') repeat;opacity:0.55;transform:translateZ(0)}
-.twinkling{background:linear-gradient(transparent, rgba(10,6,20,0.6));pointer-events:none;mix-blend-mode:screen;animation:twinkle 10s linear infinite}
-@keyframes twinkle{0%{opacity:0.3}50%{opacity:0.8}100%{opacity:0.3}}
-/* Nebula + Starfield layers */
-.nebula{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;z-index:1;pointer-events:none;
-	/* stronger, larger nebula layers for better visibility */
+/* Nebula + starfield layers */
+.nebula{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;z-index:2;pointer-events:none;
+	/* STUNNING bright nebula - visually bold */
 	background:
-		radial-gradient(ellipse at 8% 18%, rgba(167,139,250,0.30) 0%, rgba(167,139,250,0.18) 10%, transparent 32%),
-		radial-gradient(ellipse at 78% 72%, rgba(110,231,242,0.28) 0%, rgba(110,231,242,0.12) 14%, transparent 36%),
-		radial-gradient(ellipse at 50% 40%, rgba(255,200,160,0.14) 0%, rgba(255,200,160,0.06) 16%, transparent 52%),
-		radial-gradient(ellipse at 40% 70%, rgba(140,90,255,0.12) 0%, rgba(140,90,255,0.04) 12%, transparent 38%);
-	background-blend-mode:screen,screen,screen,screen;filter:blur(18px);opacity:1;animation:nebMove 42s linear infinite;
+		radial-gradient(ellipse at 8% 18%, rgba(167,139,250,0.75) 0%, rgba(167,139,250,0.45) 8%, transparent 30%),
+		radial-gradient(ellipse at 78% 72%, rgba(110,231,242,0.72) 0%, rgba(110,231,242,0.42) 10%, transparent 32%),
+		radial-gradient(ellipse at 50% 40%, rgba(255,120,80,0.68) 0%, rgba(255,120,80,0.38) 12%, transparent 48%),
+		radial-gradient(ellipse at 40% 70%, rgba(200,100,255,0.70) 0%, rgba(200,100,255,0.40) 10%, transparent 36%);
+	background-blend-mode:screen,screen,screen,screen;filter:blur(22px);opacity:1;animation:nebMove 42s linear infinite;
 	background-size:140% 140%, 120% 120%, 110% 110%, 160% 160%;
-	mix-blend-mode:screen;
+	mix-blend-mode:screen;will-change:background-position, opacity;
 }
 .stars, .twinkling{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%}
-.stars{background:#000 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000"><defs><g id="s"><circle r="1" fill="white"/></g></defs><g fill="white" opacity="0.85"><use href="#s" x="20" y="30"/><use href="#s" x="120" y="200"/><use href="#s" x="220" y="60"/><use href="#s" x="340" y="300"/><use href="#s" x="480" y="120"/><use href="#s" x="620" y="20"/><use href="#s" x="720" y="240"/><use href="#s" x="820" y="80"/><use href="#s" x="940" y="340"/><use href="#s" x="1040" y="160"/><use href="#s" x="1240" y="480"/></g></svg>') repeat;opacity:0.55;transform:translateZ(0);z-index:2}
+.stars{background:#000 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000"><defs><g id="s"><circle r="1" fill="white"/></g></defs><g fill="white" opacity="0.85"><use href="#s" x="20" y="30"/><use href="#s" x="120" y="200"/><use href="#s" x="220" y="60"/><use href="#s" x="340" y="300"/><use href="#s" x="480" y="120"/><use href="#s" x="620" y="20"/><use href="#s" x="720" y="240"/><use href="#s" x="820" y="80"/><use href="#s" x="940" y="340"/><use href="#s" x="1040" y="160"/><use href="#s" x="1240" y="480"/></g></svg>') repeat;opacity:0.48;transform:translateZ(0);z-index:1}
 .twinkling{background:linear-gradient(transparent, rgba(10,6,20,0.6));pointer-events:none;mix-blend-mode:screen;animation:twinkle 10s linear infinite;z-index:3}
 @keyframes twinkle{0%{opacity:0.3}50%{opacity:0.8}100%{opacity:0.3}}
 
