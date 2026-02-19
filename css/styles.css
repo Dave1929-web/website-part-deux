@@ -69,9 +69,9 @@ h1,h2,h3,.logo text{font-family:'Orbitron',Inter,system-ui,Arial,sans-serif}
 .orbit-1 .planet{position:static;width:190px;height:190px;margin:auto}
 .orbit-2{width:140px;height:140px;bottom:10%;left:6%;animation-duration:22s}
 .orbit-2 .planet{position:static;width:132px;height:132px;margin:auto}
-.orbit-3{width:250px;height:250px;top:36%;left:62%;animation-duration:26s}
+.orbit-3{width:250px;height:250px;top:36%;left:62%;animation:none !important}
 .orbit-3 .planet{position:static;width:236px;height:236px;margin:auto}
-.orbit-3::after{animation:counterRotate26s linear infinite}
+.orbit-3::after{animation:none !important}
 
 @keyframes counterRotate26s{
   0%{transform:rotate(0deg)}
