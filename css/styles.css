@@ -57,7 +57,12 @@ h1,h2,h3,.logo text{font-family:'Orbitron',Inter,system-ui,Arial,sans-serif}
 .planet-2::before{inset:25% auto auto 18%;width:30px;height:30px;background:rgba(255,255,255,0.22)}
 
 .planet-3{width:236px;height:236px;top:38%;left:64%;background:radial-gradient(circle at 28% 24%, #fff3ae 0%, #f1bf76 40%, #b57d53 72%, #734c3c 100%);box-shadow:0 0 36px rgba(255,210,120,0.34), inset -14px -12px 20px rgba(0,0,0,0.28);animation-duration:40s}
-.planet-3::after{content:'';position:absolute;top:50%;left:50%;width:312px;height:82px;border:5px solid rgba(214,186,255,0.76);border-radius:50%;transform:translate(-50%,-50%) rotate(-17deg);box-shadow:0 0 22px rgba(167,139,250,0.44)}
+.planet-3::after{content:'';position:absolute;top:50%;left:50%;width:312px;height:82px;border:5px solid rgba(214,186,255,0.76);border-radius:50%;transform:translate(-50%,-50%) rotate(-17deg);box-shadow:0 0 22px rgba(167,139,250,0.44);animation:counterRotateRing linear infinite;will-change:transform}
+
+@keyframes counterRotateRing{
+  0%{transform:translate(-50%,-50%) rotate(-17deg)}
+  100%{transform:translate(-50%,-50%) rotate(343deg)}
+}
 
 .planet-orbit{position:absolute;border-radius:50%;pointer-events:none;animation:orbitSpin linear infinite}
 .orbit-1{width:200px;height:200px;top:8%;right:5%;animation-duration:18s}
@@ -66,14 +71,26 @@ h1,h2,h3,.logo text{font-family:'Orbitron',Inter,system-ui,Arial,sans-serif}
 .orbit-2 .planet{position:static;width:132px;height:132px;margin:auto}
 .orbit-3{width:250px;height:250px;top:36%;left:62%;animation-duration:26s}
 .orbit-3 .planet{position:static;width:236px;height:236px;margin:auto}
+.orbit-3::after{animation:counterRotate26s linear infinite}
 
-.moon{position:absolute;border-radius:50%;background:radial-gradient(circle at 32% 30%, #d0e8ff 0%, #6eb8ff 50%, #2b5a9f 100%);box-shadow:0 0 12px rgba(110,200,255,0.4);top:50%;left:50%;margin-left:-12px;margin-top:-12px;animation:moonOrbit linear infinite}
+@keyframes counterRotate26s{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(-360deg)}
+}
+
+.moon{position:absolute;border-radius:50%;background:radial-gradient(circle at 32% 30%, #d0e8ff 0%, #6eb8ff 50%, #2b5a9f 100%);box-shadow:0 0 12px rgba(110,200,255,0.4);top:50%;left:50%;margin-left:-12px;margin-top:-12px;animation:moonOrbit linear infinite;will-change:transform,opacity,z-index}
 .moon-1{width:24px;height:24px;animation-duration:18s}
 .moon-2{width:18px;height:18px;animation-duration:22s}
 .moon-3{width:28px;height:28px;animation-duration:26s}
 
 @keyframes orbitSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-@keyframes moonOrbit{0%{transform:translate(60px, 0)}25%{transform:translate(0, 60px)}50%{transform:translate(-60px, 0)}75%{transform:translate(0, -60px)}100%{transform:translate(60px, 0)}}
+@keyframes moonOrbit{
+  0%{transform:translate(70px, 0);z-index:2;opacity:1}
+  25%{transform:translate(0, 70px) scale(0.95);z-index:-1;opacity:0.3}
+  50%{transform:translate(-70px, 0);z-index:-1;opacity:0.2}
+  75%{transform:translate(0, -70px) scale(0.95);z-index:-1;opacity:0.3}
+  100%{transform:translate(70px, 0);z-index:2;opacity:1}
+}
 
 @keyframes nebMove{0%{background-position:0% 0%}50%{background-position:20% 30%}100%{background-position:0% 0%}}
 
