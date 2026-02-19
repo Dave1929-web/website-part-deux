@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Cosmic Site</title>
+    <!-- Spacey font -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+        <!-- SVG logo (planet + ring) -->
+        <a class="logo" href="/" aria-label="Cosmic Site">
+          <svg width="140" height="28" viewBox="0 0 220 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0%" stop-color="#a78bfa" />
+                <stop offset="100%" stop-color="#6ee7f2" />
+              </linearGradient>
+            </defs>
+            <g transform="translate(0,8)">
+              <circle cx="18" cy="12" r="8" fill="url(#g1)" />
+              <ellipse cx="24" cy="16" rx="28" ry="8" fill="none" stroke="rgba(167,139,250,0.25)" stroke-width="3" transform="rotate(-18 24 16)"/>
+              <text x="60" y="18" font-family="Orbitron, Arial, sans-serif" font-size="18" fill="#c4b5fd">Cosmic Site</text>
+            </g>
+          </svg>
+        </a>
+        <nav class="nav">
+          <a href="#features">Features</a>
+          <a href="#contact">Contact</a>
+        </nav>
+    </div>
+  </header>
+  
+  <div class="nebula" aria-hidden="true"></div>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="twinkling" aria-hidden="true"></div>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h2>Welcome</h2>
+        <p>A minimal static site scaffold.</p>
+        <a class="cta" href="#contact">Get in touch</a>
+      </div>
+    </section>
+    <section class="quotes container" aria-label="Inspirational quotes">
+      <h3>Words</h3>
+      <div id="quotes">
+        <blockquote class="quote">“Love is truth.”</blockquote>
+        <blockquote class="quote">“Rage, rage against the dying of the light.”</blockquote>
+        <blockquote class="quote">“We are made of star-stuff.”</blockquote>
+      </div>
+    </section>
+
+    <section id="features" class="features container">
+      <h3>Features</h3>
+      <ul>
+        <li>Responsive layout</li>
+        <li>Simple styling</li>
+        <li>JS interactivity</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="contact container">
+      <h3>Contact</h3>
+      <form id="contactForm" autocomplete="off" novalidate>
+        <label>Name
+          <input name="name" autocomplete="name" required>
+        </label>
+        <label>Email
+          <input name="email" type="email" autocomplete="email" required>
+        </label>
+        <label>Message
+          <textarea name="message" autocomplete="off" required></textarea>
+        </label>
+        <button type="submit">Send</button>
+      </form>
+      <p class="privacy-note" style="color:var(--muted);font-size:0.9rem;margin-top:.5rem">Privacy: this demo does not store or send your personal data. Your input is not persisted by the site.</p>
+      <div id="status" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© Simple Website</div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
