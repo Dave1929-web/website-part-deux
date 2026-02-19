@@ -31,3 +31,18 @@ body{margin:0;background:var(--bg);color:#e6eef8;min-height:100vh;position:relat
 header.site-header, main, footer.site-footer{position:relative;z-index:1}
 
 @media(min-width:700px){.nav a{margin-left:1.25rem}.hero h2{font-size:4rem}}
+
+/* Shooting stars */
+.shooting-star{position:fixed;top:0;left:0;width:3px;height:2px;background:linear-gradient(90deg,rgba(255,255,255,0.9),rgba(255,200,255,0.6));transform:translate3d(0,0,0);z-index:0;border-radius:2px;box-shadow:0 0 12px rgba(166,139,255,0.6)}
+@keyframes shoot {
+	0%{opacity:1;transform:translate3d(0,0,0) rotate(25deg) scaleX(1)}
+	100%{opacity:0;transform:translate3d(-1200px,700px,0) rotate(25deg) scaleX(0.2)}
+}
+
+/* Quotes */
+.quotes{padding:2rem 0 3rem;color:#cfefff}
+.quotes h3{color:var(--accent-2);margin-bottom:0.5rem}
+#quotes{position:relative;min-height:4.5rem}
+.quote{display:none;font-size:1.15rem;margin:0;padding:.5rem 1rem;background:rgba(255,255,255,0.02);border-left:3px solid rgba(167,139,250,0.25);border-radius:6px}
+.quote.active{display:block;animation:fadeIn 900ms ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
