@@ -66,18 +66,19 @@
 
     <section id="contact" class="contact container">
       <h3>Contact</h3>
-      <form id="contactForm">
+      <form id="contactForm" autocomplete="off" novalidate>
         <label>Name
-          <input name="name" required>
+          <input name="name" autocomplete="name" required>
         </label>
         <label>Email
-          <input name="email" type="email" required>
+          <input name="email" type="email" autocomplete="email" required>
         </label>
         <label>Message
-          <textarea name="message" required></textarea>
+          <textarea name="message" autocomplete="off" required></textarea>
         </label>
         <button type="submit">Send</button>
       </form>
+      <p class="privacy-note" style="color:var(--muted);font-size:0.9rem;margin-top:.5rem">Privacy: this demo does not store or send your personal data. Your input is not persisted by the site.</p>
       <div id="status" aria-live="polite"></div>
     </section>
   </main>
