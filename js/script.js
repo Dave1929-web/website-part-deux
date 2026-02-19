@@ -152,6 +152,7 @@ document.addEventListener('DOMContentLoaded',function(){
     window.addEventListener('scroll', ()=>{
       const scrollY = window.scrollY;
       planets.forEach((orbit, i)=>{
+        if(i === 2) return; // Skip planet-3 so ring stays stationary
         const speed = [2.5, 3, 1.8][i];
         orbit.style.transform = `rotate(${scrollY * speed}deg)`;
       });
