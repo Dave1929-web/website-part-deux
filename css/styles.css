@@ -67,13 +67,13 @@ h1,h2,h3,.logo text{font-family:'Orbitron',Inter,system-ui,Arial,sans-serif}
 .orbit-3{width:250px;height:250px;top:36%;left:62%;animation-duration:26s}
 .orbit-3 .planet{position:static;width:236px;height:236px;margin:auto}
 
-.moon{position:absolute;border-radius:50%;background:radial-gradient(circle at 32% 30%, #d0e8ff 0%, #6eb8ff 50%, #2b5a9f 100%);box-shadow:0 0 12px rgba(110,200,255,0.4);animation:moonOrbit linear infinite}
+.moon{position:absolute;border-radius:50%;background:radial-gradient(circle at 32% 30%, #d0e8ff 0%, #6eb8ff 50%, #2b5a9f 100%);box-shadow:0 0 12px rgba(110,200,255,0.4);top:50%;left:50%;margin-left:-12px;margin-top:-12px;animation:moonOrbit linear infinite}
 .moon-1{width:24px;height:24px;animation-duration:18s}
 .moon-2{width:18px;height:18px;animation-duration:22s}
 .moon-3{width:28px;height:28px;animation-duration:26s}
 
 @keyframes orbitSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-@keyframes moonOrbit{0%{top:0;left:50%;transform:translateX(-50%)}100%{top:0;left:50%;transform:translateX(-50%)}}
+@keyframes moonOrbit{0%{transform:translate(60px, 0)}25%{transform:translate(0, 60px)}50%{transform:translate(-60px, 0)}75%{transform:translate(0, -60px)}100%{transform:translate(60px, 0)}}
 
 @keyframes nebMove{0%{background-position:0% 0%}50%{background-position:20% 30%}100%{background-position:0% 0%}}
 
