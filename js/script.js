@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded',function(){
     let width = 0;
     let height = 0;
     const points = [];
-    const maxPoints = 20;
-    const linkDistance = 110;
+    const maxPoints = 12;
+    const linkDistance = 95;
 
     function resizeCanvas(){
       width = hero.clientWidth;
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
       for(let i = 0; i < points.length; i++){
         const point = points[i];
-        point.life -= 0.018;
+        point.life -= 0.010;
       }
 
       for(let i = points.length - 1; i >= 0; i--){
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded',function(){
     let lastPointTime = 0;
     hero.addEventListener('pointermove', function(event){
       const now = performance.now();
-      if(now - lastPointTime < 30) return;
+      if(now - lastPointTime < 55) return;
       lastPointTime = now;
 
       const bounds = hero.getBoundingClientRect();
