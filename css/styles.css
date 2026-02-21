@@ -1,126 +1,455 @@
-/* Cosmic theme styles */
-*{box-sizing:border-box;font-family:Inter,system-ui,Arial,sans-serif}
-:root{--bg:#05040a;--accent:#6ee7f2;--accent-2:#a78bfa;--muted:#9ca3af}
-body{margin:0;background:var(--bg);color:#e6eef8;min-height:100vh;position:relative;overflow-x:hidden}
-.container{max-width:1000px;margin:0 auto;padding:1rem}
-.site-header{background:transparent;padding-top:1rem}
-.site-header .container{display:flex;align-items:center;justify-content:space-between}
-.logo{margin:0;padding:.75rem 0;font-size:1.25rem;font-weight:700;color:var(--accent-2)}
-.nav a{margin-left:1rem;color:var(--accent);text-decoration:none}
-/* Use Orbitron for headings and logo */
-h1,h2,h3,.logo text{font-family:'Orbitron',Inter,system-ui,Arial,sans-serif}
-.hero{padding:6rem 0 4rem;text-align:center;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0));position:relative;overflow:hidden}
-.hero-planets{position:absolute;inset:0;pointer-events:none;z-index:0}
-.constellation{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
-.hero .container{position:relative;z-index:2}
-.hero h2{margin:0 0 .5rem;font-size:3rem;color:#ffffff;text-shadow:0 4px 20px rgba(0,0,0,0.6)}
-.hero-title{display:inline-block}.char{display:inline-block;opacity:0;animation:revealChar 0.5s ease forwards;text-shadow:0 0 14px rgba(167,139,250,0.6);will-change:opacity,transform}
-.char:nth-child(1){animation-delay:0.05s}.char:nth-child(2){animation-delay:0.15s}.char:nth-child(3){animation-delay:0.25s}.char:nth-child(4){animation-delay:0.35s}.char:nth-child(5){animation-delay:0.45s}.char:nth-child(6){animation-delay:0.55s}.char:nth-child(7){animation-delay:0.65s}
-@keyframes revealChar{0%{opacity:0;transform:translateY(12px)}100%{opacity:1;transform:translateY(0)}}
-.hero p{margin:0 0 1rem;color:var(--muted)}
-.cta{display:inline-block;padding:.75rem 1.25rem;background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#021025;border-radius:999px;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(167,139,250,0.25)}
-.features{padding:4rem 0}
-.features h3{color:#cfefff}
-.features ul{padding-left:1rem}
-.contact{padding:4rem 0}
-.contact form{display:grid;gap:.5rem;max-width:480px}
-.contact label{display:flex;flex-direction:column}
-.contact input,.contact textarea{padding:.6rem;border:1px solid rgba(167,139,250,0.12);border-radius:8px;background:rgba(255,255,255,0.02);color:#e6eef8}
-.contact button{padding:.6rem 1rem;background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#021025;border:none;border-radius:10px}
-.site-footer{padding:1rem 0;text-align:center;color:var(--muted);font-size:.9rem}
-
-/* Nebula + starfield layers */
-.nebula{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;z-index:2;pointer-events:none;
-	/* STUNNING bright nebula - visually bold */
-	background:
-		radial-gradient(ellipse at 8% 18%, rgba(167,139,250,0.75) 0%, rgba(167,139,250,0.45) 8%, transparent 30%),
-		radial-gradient(ellipse at 78% 72%, rgba(110,231,242,0.72) 0%, rgba(110,231,242,0.42) 10%, transparent 32%),
-		radial-gradient(ellipse at 50% 40%, rgba(255,120,80,0.68) 0%, rgba(255,120,80,0.38) 12%, transparent 48%),
-		radial-gradient(ellipse at 40% 70%, rgba(200,100,255,0.70) 0%, rgba(200,100,255,0.40) 10%, transparent 36%);
-	background-blend-mode:screen,screen,screen,screen;filter:blur(22px);opacity:1;animation:nebMove 42s linear infinite;
-	background-size:140% 140%, 120% 120%, 110% 110%, 160% 160%;
-	mix-blend-mode:screen;will-change:background-position, opacity;
-}
-.stars, .twinkling{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%}
-.stars.constellation-mode{cursor:crosshair}.stars.constellation-mode .star-clickable{cursor:pointer;opacity:0.8}
-.constellation-line{position:absolute;background:linear-gradient(90deg, rgba(110,231,242,0.6), rgba(167,139,250,0.4));pointer-events:none;z-index:5}
-.twinkling{background:linear-gradient(transparent, rgba(10,6,20,0.6));pointer-events:none;mix-blend-mode:screen;animation:twinkle 10s linear infinite;z-index:3}
-@keyframes twinkle{0%{opacity:0.3}50%{opacity:0.8}100%{opacity:0.3}}
-
-.planet{position:absolute;border-radius:50%;box-shadow:0 0 24px rgba(110,231,242,0.22), inset -12px -10px 18px rgba(0,0,0,0.35);animation:planetDrift 28s ease-in-out infinite alternate;transform:none !important}
-.planet::before{content:'';position:absolute;border-radius:50%;opacity:0.35}
-
-.planet-1{width:190px;height:190px;top:8%;right:7%;background:radial-gradient(circle at 30% 28%, #ffe9c9 0%, #ffbe8a 36%, #9d62b0 70%, #4b2a63 100%);box-shadow:0 0 38px rgba(255,190,140,0.38), inset -14px -12px 20px rgba(0,0,0,0.28)}
-.planet-1::before{inset:18% 16% auto auto;width:42px;height:42px;background:rgba(255,255,255,0.24)}
-
-.planet-2{width:132px;height:132px;bottom:10%;left:8%;background:radial-gradient(circle at 32% 30%, #e5fbff 0%, #8de5ff 42%, #4f83ea 75%, #2f2f7a 100%);box-shadow:0 0 32px rgba(120,220,255,0.35), inset -10px -10px 18px rgba(0,0,0,0.28);animation-duration:34s}
-.planet-2::before{inset:25% auto auto 18%;width:30px;height:30px;background:rgba(255,255,255,0.22)}
-
-.planet-3{width:236px;height:236px;top:38%;left:64%;background:radial-gradient(circle at 28% 24%, #fff3ae 0%, #f1bf76 40%, #b57d53 72%, #734c3c 100%);box-shadow:0 0 36px rgba(255,210,120,0.34), inset -14px -12px 20px rgba(0,0,0,0.28);animation-duration:40s}
-.planet-3::after{content:'';position:absolute;top:50%;left:50%;width:312px;height:82px;border:5px solid rgba(214,186,255,0.76);border-radius:50%;transform:translate(-50%,-50%) rotate(-17deg);box-shadow:0 0 22px rgba(167,139,250,0.44);animation:counterRotateRing linear infinite;will-change:transform}
-
-@keyframes counterRotateRing{
-  0%{transform:translate(-50%,-50%) rotate(-17deg)}
-  100%{transform:translate(-50%,-50%) rotate(343deg)}
+:root{
+	--bg:#0c111b;
+	--panel:#121a28;
+	--panel-alt:#162032;
+	--text:#e9eef9;
+	--muted:#97a4bf;
+	--line:#253249;
+	--accent:#4c8dff;
+	--up:#24b47e;
+	--down:#ef5350;
 }
 
-.planet-orbit{position:absolute;border-radius:50%;pointer-events:none;animation:orbitSpin linear infinite}
-.orbit-1{width:200px;height:200px;top:8%;right:5%;animation-duration:18s}
-.orbit-1 .planet{position:static;width:190px;height:190px;margin:auto}
-.orbit-2{width:140px;height:140px;bottom:10%;left:6%;animation-duration:22s}
-.orbit-2 .planet{position:static;width:132px;height:132px;margin:auto}
-.orbit-3{width:250px;height:250px;top:36%;left:62%;animation:none !important}
-.orbit-3 .planet{position:static;width:236px;height:236px;margin:auto}
-.orbit-3::after{animation:none !important}
-
-@keyframes counterRotate26s{
-  0%{transform:rotate(0deg)}
-  100%{transform:rotate(-360deg)}
+*{box-sizing:border-box}
+body{
+	margin:0;
+	font-family:Inter,Segoe UI,Arial,sans-serif;
+	background:linear-gradient(180deg,#0c111b,#111b2b);
+	color:var(--text);
 }
 
-.moon{position:absolute;border-radius:50%;background:radial-gradient(circle at 32% 30%, #d0e8ff 0%, #6eb8ff 50%, #2b5a9f 100%);box-shadow:0 0 12px rgba(110,200,255,0.4);top:50%;left:50%;margin-left:-12px;margin-top:-12px;animation:moonOrbit linear infinite;will-change:transform,opacity,z-index}
-.moon-1{width:24px;height:24px;animation-duration:18s}
-.moon-2{width:18px;height:18px;animation-duration:22s}
-.moon-3{width:28px;height:28px;animation-duration:26s}
+h1,h2,h3,p{margin:0}
 
-@keyframes orbitSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-@keyframes moonOrbit{
-  0%{transform:translate(70px, 0px) scale(1);z-index:2;opacity:1}
-  25%{transform:translate(0px, -70px) scale(0.98);z-index:1;opacity:0.8}
-  50%{transform:translate(-70px, 0px) scale(0.90);z-index:-1;opacity:0.2}
-  75%{transform:translate(0px, 70px) scale(0.98);z-index:1;opacity:0.8}
-  100%{transform:translate(70px, 0px) scale(1);z-index:2;opacity:1}
+.wrap{
+	width:min(1200px,94vw);
+	margin:0 auto;
 }
 
-@keyframes nebMove{0%{background-position:0% 0%}50%{background-position:20% 30%}100%{background-position:0% 0%}}
-
-/* make content sit above backgrounds */
-header.site-header, main, footer.site-footer{position:relative;z-index:10}
-
-@media(min-width:700px){.nav a{margin-left:1.25rem}.hero h2{font-size:4rem}}
-
-@media(max-width:900px){
-	.planet-1{width:132px;height:132px;top:10%;right:4%}
-	.planet-2{width:96px;height:96px;bottom:8%;left:4%}
-	.planet-3{width:158px;height:158px;top:50%;left:58%}
-	.planet-3::after{width:208px;height:56px}
+.topbar{
+	position:sticky;
+	top:0;
+	z-index:10;
+	border-bottom:1px solid var(--line);
+	background:rgba(12,17,27,0.95);
+	backdrop-filter:blur(8px);
 }
 
-/* Shooting stars */
-.shooting-star{position:fixed;top:0;left:0;width:3px;height:2px;background:linear-gradient(90deg,rgba(255,255,255,0.9),rgba(255,200,255,0.6));transform:translate3d(0,0,0);z-index:0;border-radius:2px;box-shadow:0 0 12px rgba(166,139,255,0.6)}
-@keyframes shoot {
-	0%{opacity:1;transform:translate3d(0,0,0) rotate(25deg) scaleX(1)}
-	100%{opacity:0;transform:translate3d(-1400px,900px,0) rotate(25deg) scaleX(0.15)}
+.topbar-inner{
+	padding:1rem 0;
+	display:flex;
+	align-items:flex-end;
+	justify-content:space-between;
+	gap:1rem;
 }
 
-/* Quotes */
-.quotes{padding:2rem 0 3rem;color:#cfefff}
-.quotes h3{color:var(--accent-2);margin-bottom:0.5rem}
-#quotes{position:relative;min-height:4.5rem}
-.quote{display:none;font-size:1.15rem;margin:0;padding:.5rem 1rem;background:rgba(255,255,255,0.02);border-left:3px solid rgba(167,139,250,0.25);border-radius:6px}
-.quote.active{display:block;animation:fadeIn 900ms ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h1{
+	font-size:1.5rem;
+	font-weight:700;
+}
 
-/* Comet styling */
-.comet{position:fixed;top:0;left:0;width:6px;height:3px;background:linear-gradient(90deg,rgba(255,250,220,1),rgba(167,139,250,0.9));border-radius:3px;box-shadow:0 0 18px rgba(255,220,180,0.6);z-index:0}
-@keyframes cometMove{0%{opacity:1;transform:translate3d(0,0,0) rotate(18deg) scaleX(1)}100%{opacity:0;transform:translate3d(-2200px,1100px,0) rotate(18deg) scaleX(0.15)}}
+.subtitle{
+	color:var(--muted);
+	margin-top:0.25rem;
+}
+
+.toolbar{
+	display:flex;
+	gap:0.8rem;
+}
+
+.toolbar label{
+	display:grid;
+	gap:0.25rem;
+	color:var(--muted);
+	font-size:0.85rem;
+}
+
+select{
+	border:1px solid var(--line);
+	background:var(--panel);
+	color:var(--text);
+	border-radius:8px;
+	padding:0.5rem 0.65rem;
+}
+
+main{
+	padding:1rem 0 1.4rem;
+	display:grid;
+	gap:1rem;
+}
+
+.panel{
+	background:var(--panel);
+	border:1px solid var(--line);
+	border-radius:12px;
+	padding:1rem;
+}
+
+.account-panel{
+	display:grid;
+	grid-template-columns:1fr auto;
+	gap:0.8rem;
+	align-items:end;
+}
+
+.inline-form{
+	display:flex;
+	gap:0.5rem;
+	align-items:center;
+	flex-wrap:wrap;
+}
+
+.inline-form input{
+	min-width:280px;
+	padding:0.5rem 0.6rem;
+	border:1px solid var(--line);
+	border-radius:8px;
+	background:#0f1827;
+	color:var(--text);
+}
+
+.inline-form button{
+	background:var(--accent);
+	color:white;
+	border:none;
+	border-radius:8px;
+	padding:0.52rem 0.8rem;
+	cursor:pointer;
+}
+
+.entry-form{
+	margin-top:0.65rem;
+	display:grid;
+	gap:0.75rem;
+}
+
+.import-box{
+	border:1px dashed var(--line);
+	border-radius:10px;
+	padding:0.75rem;
+	margin-top:0.65rem;
+	background:#0f1827;
+}
+
+.import-box h3{
+	font-size:0.9rem;
+	margin-bottom:0.4rem;
+}
+
+.import-actions{
+	display:flex;
+	gap:0.5rem;
+	align-items:center;
+	margin-top:0.5rem;
+	flex-wrap:wrap;
+}
+
+.import-actions button{
+	background:transparent;
+	color:var(--text);
+	border:1px solid var(--line);
+	border-radius:8px;
+	padding:0.5rem 0.7rem;
+	cursor:pointer;
+}
+
+.form-grid{
+	display:grid;
+	grid-template-columns:repeat(2,minmax(140px,1fr));
+	gap:0.6rem;
+}
+
+.entry-form label{
+	display:grid;
+	gap:0.25rem;
+	font-size:0.82rem;
+	color:var(--muted);
+}
+
+.input-with-button{
+	display:flex;
+	gap:4px;
+}
+
+.input-with-button input{
+	flex:1;
+}
+
+.icon-btn{
+	padding:6px 8px;
+	border:1px solid var(--line);
+	border-radius:8px;
+	background:#0f1827;
+	color:var(--accent);
+	cursor:pointer;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	transition:background-color 0.2s, border-color 0.2s;
+}
+
+.icon-btn:hover{
+	background:#1a2332;
+	border-color:var(--accent);
+}
+
+.icon-btn:disabled{
+	opacity:0.5;
+	cursor:not-allowed;
+}
+
+.entry-form input,
+.entry-form select{
+	width:100%;
+	font-size:0.88rem;
+	padding:0.5rem 0.6rem;
+	border-radius:8px;
+	border:1px solid var(--line);
+	background:#0f1827;
+	color:var(--text);
+}
+
+.option-fields{
+	border:1px dashed var(--line);
+	border-radius:10px;
+	padding:0.7rem;
+	margin:0;
+}
+
+.option-fields legend{
+	padding:0 0.35rem;
+	color:var(--muted);
+	font-size:0.78rem;
+}
+
+.form-actions{
+	display:flex;
+	justify-content:flex-end;
+	gap:0.5rem;
+}
+
+.form-actions button{
+	background:var(--accent);
+	color:white;
+	border:none;
+	border-radius:8px;
+	padding:0.55rem 0.8rem;
+	font-weight:600;
+	cursor:pointer;
+}
+
+.form-actions .secondary{
+	background:transparent;
+	border:1px solid var(--line);
+	color:var(--text);
+}
+
+.danger-outline{
+	background:transparent;
+	color:var(--down);
+	border:1px solid var(--down);
+	border-radius:8px;
+	padding:0.5rem 0.7rem;
+	cursor:pointer;
+	font-size:0.88rem;
+	transition:background-color 0.2s;
+}
+
+.danger-outline:hover{
+	background:rgba(239,68,68,0.1);
+}
+
+.account-controls{
+	display:flex;
+	gap:0.5rem;
+	align-items:center;
+	flex-wrap:wrap;
+}
+
+.status{
+	font-size:0.82rem;
+	margin:0;
+	color:var(--muted);
+}
+
+.hidden{
+	display:none;
+}
+
+.panel-head{
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	margin-bottom:0.6rem;
+}
+
+#asOfLabel,.note{
+	color:var(--muted);
+	font-size:0.85rem;
+}
+
+.kpis{
+	display:grid;
+	grid-template-columns:repeat(4,minmax(180px,1fr));
+	gap:0.8rem;
+}
+
+.kpi{
+	background:var(--panel-alt);
+	border:1px solid var(--line);
+	border-radius:10px;
+	padding:0.75rem;
+}
+
+.kpi .label{
+	color:var(--muted);
+	font-size:0.78rem;
+	margin-bottom:0.35rem;
+}
+
+.kpi .value{
+	font-size:1.12rem;
+	font-weight:700;
+}
+
+.up{color:var(--up)}
+.down{color:var(--down)}
+
+.panel-head{
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	margin-bottom:0.75rem;
+}
+
+.panel-head h2{
+	margin:0;
+}
+
+.grid-2{
+	display:grid;
+	grid-template-columns:2fr 1fr;
+	gap:1rem;
+}
+
+.metric-grid{
+	margin-top:0.6rem;
+	display:grid;
+	grid-template-columns:1fr 1fr;
+	gap:0.6rem;
+}
+
+.metric{
+	background:var(--panel-alt);
+	border:1px solid var(--line);
+	border-radius:8px;
+	padding:0.65rem;
+}
+
+.metric .label{
+	color:var(--muted);
+	font-size:0.76rem;
+}
+
+.metric .value{
+	margin-top:0.25rem;
+	font-weight:700;
+}
+
+.split{
+	margin-top:0.6rem;
+	display:grid;
+	grid-template-columns:1fr 1fr;
+	gap:0.8rem;
+}
+
+.list{
+	list-style:none;
+	margin:0.5rem 0 0;
+	padding:0;
+}
+
+.list li{
+	display:flex;
+	justify-content:space-between;
+	border-bottom:1px solid var(--line);
+	padding:0.45rem 0;
+	color:#d4def2;
+}
+
+.table-wrap{
+	overflow:auto;
+}
+
+table{
+	width:100%;
+	border-collapse:collapse;
+	min-width:580px;
+}
+
+th,td{
+	padding:0.55rem 0.5rem;
+	border-bottom:1px solid var(--line);
+	text-align:left;
+	font-size:0.86rem;
+}
+
+th{
+	color:var(--muted);
+	font-weight:600;
+}
+
+tbody tr:hover{
+	background:rgba(76,141,255,0.08);
+}
+
+.row-actions{
+	display:flex;
+	gap:0.35rem;
+}
+
+.row-actions button{
+	border:1px solid var(--line);
+	background:transparent;
+	color:var(--text);
+	border-radius:6px;
+	padding:0.2rem 0.45rem;
+	font-size:0.78rem;
+	cursor:pointer;
+}
+
+.row-actions .danger{
+	border-color:#7a2b3b;
+	color:#f29cb0;
+}
+
+canvas{
+	width:100%;
+	height:300px;
+	border:1px solid var(--line);
+	border-radius:10px;
+	background:#0f1826;
+}
+
+.footer{
+	padding:0.2rem 0 1.2rem;
+	color:var(--muted);
+	font-size:0.82rem;
+}
+
+@media (max-width:980px){
+	.kpis{grid-template-columns:repeat(2,minmax(160px,1fr))}
+	.grid-2{grid-template-columns:1fr}
+	.topbar-inner{align-items:flex-start;flex-direction:column}
+	.account-panel{grid-template-columns:1fr}
+}
+
+@media (max-width:560px){
+	.kpis{grid-template-columns:1fr}
+	.metric-grid{grid-template-columns:1fr}
+	.split{grid-template-columns:1fr}
+	.toolbar{width:100%}
+	.toolbar label{flex:1}
+	select{width:100%}
+	.form-grid{grid-template-columns:1fr}
+}

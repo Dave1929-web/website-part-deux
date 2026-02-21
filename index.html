@@ -3,105 +3,354 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Cosmic Site</title>
-    <!-- Spacey font -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css?v=20260219-5">
+  <title>PulseRisk | Stock P/L & Risk Tracker</title>
+  <link rel="stylesheet" href="css/styles.css?v=20260219-6">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-        <!-- SVG logo (planet + ring) -->
-        <a class="logo" href="/" aria-label="Cosmic Site">
-          <svg width="140" height="28" viewBox="0 0 220 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-            <defs>
-              <linearGradient id="g1" x1="0" x2="1">
-                <stop offset="0%" stop-color="#a78bfa" />
-                <stop offset="100%" stop-color="#6ee7f2" />
-              </linearGradient>
-            </defs>
-            <g transform="translate(0,8)">
-              <circle cx="18" cy="12" r="8" fill="url(#g1)" />
-              <ellipse cx="24" cy="16" rx="28" ry="8" fill="none" stroke="rgba(167,139,250,0.25)" stroke-width="3" transform="rotate(-18 24 16)"/>
-              <text x="60" y="18" font-family="Orbitron, Arial, sans-serif" font-size="18" fill="#c4b5fd">Cosmic Site</text>
-            </g>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div>
+        <h1>PulseRisk Dashboard</h1>
+        <p class="subtitle">Stock P/L tracker with integrated portfolio risk analytics.</p>
+      </div>
+      <div class="toolbar">
+        <label>
+          View
+          <select id="viewModeSelect">
+            <option value="SINGLE" selected>Selected Account</option>
+            <option value="COMBINED">Combined Accounts</option>
+          </select>
+        </label>
+        <label>
+          Account
+          <select id="accountSelect"></select>
+        </label>
+        <label>
+          Lookback
+          <select id="lookbackSelect">
+            <option value="30">30D</option>
+            <option value="60">60D</option>
+            <option value="90" selected>90D</option>
+          </select>
+        </label>
+        <label>
+          Benchmark
+          <select id="benchmarkSelect">
+            <option value="SPY" selected>SPY</option>
+            <option value="QQQ">QQQ</option>
+          </select>
+        </label>
+        <button id="apiSettingsBtn" type="button" class="icon-btn" title="Configure market data API">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.5 8a1.5 1.5 0 0 0-.5-1.118v-.382a1.5 1.5 0 0 0-.146-.637l-.192-.333a1.5 1.5 0 0 0-.546-.546l-.192-.111-.146-.084a1.5 1.5 0 0 0-1.31.11l-.277.16a6.5 6.5 0 0 0-.85-.494V3.5a1.5 1.5 0 0 0-1.5-1.5h-.75a1.5 1.5 0 0 0-1.5 1.5v1.065a6.5 6.5 0 0 0-.85.494l-.277-.16a1.5 1.5 0 0 0-1.31-.11l-.146.084-.192.111a1.5 1.5 0 0 0-.546.546l-.192.333a1.5 1.5 0 0 0-.146.637v.382A1.5 1.5 0 0 0 4.5 8a1.5 1.5 0 0 0 .5 1.118v.382a1.5 1.5 0 0 0 .146.637l.192.333a1.5 1.5 0 0 0 .546.546l.192.111.146.084a1.5 1.5 0 0 0 1.31-.11l.277-.16a6.5 6.5 0 0 0 .85.494v1.065a1.5 1.5 0 0 0 1.5 1.5h.75a1.5 1.5 0 0 0 1.5-1.5v-1.065a6.5 6.5 0 0 0 .85-.494l.277.16a1.5 1.5 0 0 0 1.31.11l.146-.084.192-.111a1.5 1.5 0 0 0 .546-.546l.192-.333a1.5 1.5 0 0 0 .146-.637v-.382A1.5 1.5 0 0 0 15.5 8zM10 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" fill="currentColor"/>
+            <circle cx="10" cy="8" r="2" fill="currentColor"/>
           </svg>
-        </a>
-        <nav class="nav">
-          <a href="#features">Features</a>
-          <a href="#contact">Contact</a>
-        </nav>
+        </button>
+      </div>
     </div>
   </header>
-  
-  <div class="nebula" aria-hidden="true"></div>
-  <div class="stars" aria-hidden="true"></div>
-  <div class="twinkling" aria-hidden="true"></div>
 
-  <main>
-    <section class="hero" id="hero">
-      <div class="hero-planets" aria-hidden="true">
-        <div class="planet-orbit orbit-1">
-          <div class="planet planet-1"></div>
-          <div class="moon moon-1"></div>
-        </div>
-        <div class="planet-orbit orbit-2">
-          <div class="planet planet-2"></div>
-          <div class="moon moon-2"></div>
-        </div>
-        <div class="planet-orbit orbit-3">
-          <div class="planet planet-3"></div>
-          <div class="moon moon-3"></div>
-        </div>
+  <main class="wrap">
+    <section class="panel kpis" id="kpiGrid" aria-label="Portfolio summary"></section>
+
+    <section class="panel account-panel">
+      <div>
+        <h2>Accounts Database</h2>
+        <p class="note" id="scopeLabel">Viewing selected account.</p>
       </div>
-      <canvas id="constellation" class="constellation" aria-hidden="true"></canvas>
-      <div class="container">
-        <h2 class="hero-title"><span class="char">W</span><span class="char">e</span><span class="char">l</span><span class="char">c</span><span class="char">o</span><span class="char">m</span><span class="char">e</span></h2>
-        <p>A minimal static site scaffold.</p>
-        <a class="cta" href="#contact">Get in touch</a>
+      <div class="account-controls">
+        <form id="addAccountForm" class="inline-form" autocomplete="off">
+          <input id="newAccountName" placeholder="New account name (e.g., Schwab IRA)" required>
+          <button type="submit">Add Account</button>
+        </form>
+        <button id="clearAccountBtn" type="button" class="danger-outline">Clear Account Data</button>
       </div>
-    </section>
-    <section class="quotes container" aria-label="Inspirational quotes">
-      <h3>Words</h3>
-      <div id="quotes">
-        <blockquote class="quote">“Love is truth.”</blockquote>
-        <blockquote class="quote">“Rage, rage against the dying of the light.”</blockquote>
-        <blockquote class="quote">“We are made of star-stuff.”</blockquote>
-      </div>
+      <p id="accountStatus" class="status" aria-live="polite"></p>
     </section>
 
-    <section id="features" class="features container">
-      <h3>Features</h3>
-      <ul>
-        <li>Responsive layout</li>
-        <li>Simple styling</li>
-        <li>JS interactivity</li>
-      </ul>
+    <section class="grid-2">
+      <article class="panel">
+        <h2>Add / Update Holding</h2>
+        <form id="holdingForm" class="entry-form" autocomplete="off">
+          <div class="form-grid">
+            <label>Account
+              <select id="holdingAccountSelect"></select>
+            </label>
+            <label>Symbol
+              <div class="input-with-button">
+                <input id="holdingSymbol" required placeholder="AAPL or AAPL240621C00180000">
+                <button id="lookupPriceBtn" type="button" class="icon-btn" title="Fetch live price data">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.7 6.3a.5.5 0 0 0 0-.7l-2-2a.5.5 0 1 0-.7.7L13.5 6H7a.5.5 0 0 0 0 1h6.5L12 8.7a.5.5 0 0 0 .7.7l2-2Z" fill="currentColor"/>
+                    <path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1ZM2 8a6 6 0 1 1 12 0A6 6 0 0 1 2 8Z" fill="currentColor"/>
+                  </svg>
+                </button>
+              </div>
+            </label>
+            <label>Asset Type
+              <select id="holdingAssetType">
+                <option value="STOCK" selected>Stock / ETF</option>
+                <option value="OPTION">Option</option>
+              </select>
+            </label>
+            <label>Sector
+              <input id="holdingSector" required placeholder="Technology">
+            </label>
+            <label>Quantity
+              <input id="holdingQty" type="number" step="1" required placeholder="100">
+            </label>
+            <label>Avg Cost
+              <input id="holdingAvgCost" type="number" step="0.01" required placeholder="190.25">
+            </label>
+            <label>Last Price
+              <input id="holdingLast" type="number" step="0.01" required placeholder="198.30">
+            </label>
+            <label>Prev Close
+              <input id="holdingPrevClose" type="number" step="0.01" required placeholder="196.90">
+            </label>
+            <label>Beta
+              <input id="holdingBeta" type="number" step="0.01" required placeholder="1.05">
+            </label>
+          </div>
+          <fieldset id="optionFields" class="option-fields hidden">
+            <legend>Option Details</legend>
+            <div class="form-grid">
+              <label>Underlying
+                <input id="holdingUnderlying" placeholder="AAPL">
+              </label>
+              <label>Option Type
+                <select id="holdingOptionType">
+                  <option value="CALL" selected>Call</option>
+                  <option value="PUT">Put</option>
+                </select>
+              </label>
+              <label>Strike
+                <input id="holdingStrike" type="number" step="0.01" placeholder="180">
+              </label>
+              <label>Expiry
+                <input id="holdingExpiry" type="date">
+              </label>
+              <label>Contract Multiplier
+                <input id="holdingMultiplier" type="number" step="1" value="100">
+              </label>
+            </div>
+          </fieldset>
+          <div class="form-actions">
+            <button id="saveHoldingBtn" type="submit">Save Holding</button>
+            <button id="cancelHoldingEditBtn" type="button" class="secondary hidden">Cancel Edit</button>
+          </div>
+          <p id="holdingStatus" class="status" aria-live="polite"></p>
+        </form>
+      </article>
+
+      <article class="panel">
+        <h2>Add Trade / Activity</h2>
+        <div class="import-box">
+          <h3>Import Charles Schwab Activity (CSV)</h3>
+          <p class="note">Supported Schwab columns: Date/Transaction Date, Action, Symbol, Description, Quantity, Price, Fees &amp; Comm, Amount.</p>
+          <div class="import-actions">
+            <input id="schwabCsvInput" type="file" accept=".csv,text/csv">
+            <button id="importSchwabBtn" type="button">Import Schwab CSV</button>
+          </div>
+          <p id="importStatus" class="status" aria-live="polite"></p>
+        </div>
+        <form id="activityForm" class="entry-form" autocomplete="off">
+          <div class="form-grid">
+            <label>Account
+              <select id="activityAccountSelect"></select>
+            </label>
+            <label>Date
+              <input id="activityDate" type="date" required>
+            </label>
+            <label>Type
+              <select id="activityType">
+                <option value="BUY" selected>BUY</option>
+                <option value="SELL">SELL</option>
+                <option value="DIVIDEND">DIVIDEND</option>
+                <option value="FEE">FEE</option>
+                <option value="DEPOSIT">DEPOSIT</option>
+                <option value="WITHDRAWAL">WITHDRAWAL</option>
+                <option value="ASSIGNMENT">ASSIGNMENT</option>
+                <option value="EXPIRY">EXPIRY</option>
+              </select>
+            </label>
+            <label>Asset Type
+              <select id="activityAssetType">
+                <option value="STOCK" selected>Stock / ETF</option>
+                <option value="OPTION">Option</option>
+                <option value="CASH">Cash</option>
+              </select>
+            </label>
+            <label>Symbol
+              <input id="activitySymbol" placeholder="AAPL" required>
+            </label>
+            <label>Quantity
+              <input id="activityQty" type="number" step="1" placeholder="100">
+            </label>
+            <label>Price
+              <input id="activityPrice" type="number" step="0.01" placeholder="198.10">
+            </label>
+            <label>Fees
+              <input id="activityFees" type="number" step="0.01" value="0">
+            </label>
+            <label>Net Amount
+              <input id="activityAmount" type="number" step="0.01" placeholder="Auto-calculated">
+            </label>
+          </div>
+          <fieldset id="activityOptionFields" class="option-fields hidden">
+            <legend>Option Trade Details</legend>
+            <div class="form-grid">
+              <label>Underlying
+                <input id="activityUnderlying" placeholder="AAPL">
+              </label>
+              <label>Option Type
+                <select id="activityOptionType">
+                  <option value="CALL" selected>Call</option>
+                  <option value="PUT">Put</option>
+                </select>
+              </label>
+              <label>Strike
+                <input id="activityStrike" type="number" step="0.01" placeholder="180">
+              </label>
+              <label>Expiry
+                <input id="activityExpiry" type="date">
+              </label>
+              <label>Contracts Multiplier
+                <input id="activityMultiplier" type="number" step="1" value="100">
+              </label>
+            </div>
+          </fieldset>
+          <div class="form-actions">
+            <button id="saveActivityBtn" type="submit">Add Activity</button>
+            <button id="cancelActivityEditBtn" type="button" class="secondary hidden">Cancel Edit</button>
+          </div>
+          <p id="activityStatus" class="status" aria-live="polite"></p>
+        </form>
+      </article>
     </section>
 
-    <section id="contact" class="contact container">
-      <h3>Contact</h3>
-      <form id="contactForm" autocomplete="off" novalidate>
-        <label>Name
-          <input name="name" autocomplete="name" required>
-        </label>
-        <label>Email
-          <input name="email" type="email" autocomplete="email" required>
-        </label>
-        <label>Message
-          <textarea name="message" autocomplete="off" required></textarea>
-        </label>
-        <button type="submit">Send</button>
-      </form>
-      <p class="privacy-note" style="color:var(--muted);font-size:0.9rem;margin-top:.5rem">Privacy: this demo does not store or send your personal data. Your input is not persisted by the site.</p>
-      <div id="status" aria-live="polite"></div>
+    <section class="grid-2">
+      <article class="panel">
+        <div class="panel-head">
+          <h2>Equity Curve</h2>
+          <p id="asOfLabel"></p>
+        </div>
+        <canvas id="equityChart" width="900" height="300" aria-label="Portfolio equity chart"></canvas>
+      </article>
+      <article class="panel">
+        <h2>Risk Snapshot</h2>
+        <div id="riskGrid" class="metric-grid"></div>
+        <p class="note">Risk calculations use daily returns from displayed lookback period.</p>
+      </article>
+    </section>
+
+    <section class="grid-2">
+      <article class="panel">
+        <div class="panel-head">
+          <h2>Holdings</h2>
+          <button id="refreshPricesBtn" type="button" class="icon-btn" title="Refresh all prices from market data">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13.65 2.35a7.958 7.958 0 0 0-11.3 0A7.958 7.958 0 0 0 0 8v1h2V8a5.97 5.97 0 0 1 1.758-4.242 5.97 5.97 0 0 1 8.484 0A5.97 5.97 0 0 1 14 8a5.97 5.97 0 0 1-1.758 4.242 5.97 5.97 0 0 1-8.484 0L2.343 13.657a7.958 7.958 0 0 0 11.307 0A7.958 7.958 0 0 0 16 8a7.958 7.958 0 0 0-2.35-5.65z" fill="currentColor"/>
+              <path d="M2 8V4H0v4.5a.5.5 0 0 0 .5.5H5V7H2z" fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Type</th>
+                <th>Sector</th>
+                <th>Qty</th>
+                <th>Avg Cost</th>
+                <th>Last</th>
+                <th>Day P/L</th>
+                <th>Unrealized P/L</th>
+                <th>Weight</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="holdingsBody"></tbody>
+          </table>
+        </div>
+      </article>
+      <article class="panel">
+        <h2>Concentration</h2>
+        <div class="split">
+          <div>
+            <h3>Top Positions</h3>
+            <ul id="topPositions" class="list"></ul>
+          </div>
+          <div>
+            <h3>Sector Exposure</h3>
+            <ul id="sectorExposure" class="list"></ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid-2">
+      <article class="panel">
+        <h2>Daily P/L Contributors</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Day P/L</th>
+                <th>Move %</th>
+              </tr>
+            </thead>
+            <tbody id="contribBody"></tbody>
+          </table>
+        </div>
+      </article>
+      <article class="panel">
+        <h2>Recent Activity</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Account</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>Amount</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="activityBody"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2>Tax Lots (Realized)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Lot ID</th>
+              <th>Symbol</th>
+              <th>Open Date</th>
+              <th>Close Date</th>
+              <th>Qty</th>
+              <th>Basis Method</th>
+              <th>Realized Gain</th>
+            </tr>
+          </thead>
+          <tbody id="lotsBody"></tbody>
+        </table>
+      </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">© Simple Website</div>
+  <footer class="footer wrap">
+    <p>Demo only. Not investment advice.</p>
   </footer>
 
-  <script src="js/script.js?v=20260219-3"></script>
+  <script src="js/script.js?v=20260220-7"></script>
 </body>
 </html>
